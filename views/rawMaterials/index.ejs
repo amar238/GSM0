@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Raw Materials</h2>
+  <a href="/raw-materials/new" class="btn btn-primary">➕ Add New</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Name</th>
+      <th>Client</th>
+      <th>HSN</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% rawMaterials.forEach(material=> { %>
+      <tr>
+        <td>
+          <%= material.name %>
+        </td>
+        <td>
+          <%= material.client?.name || 'N/A' %>
+        </td>
+        <td>
+          <%= material.HSN %>
+        </td>
+        <td>
+          <%= material.quantity %>
+        </td>
+        <td>
+          <a href="/raw-materials/<%= material._id %>/stock" class="btn btn-sm btn-info">📊 Stock</a>
+          <a href="/raw-materials/<%= material._id %>/edit" class="btn btn-sm btn-warning">✏️ Edit</a>
+          <form action="/raw-materials/<%= material._id %>?_method=DELETE" method="POST" class="d-inline"
+            onsubmit="return confirm('Are you sure?');">
+            <button class="btn btn-sm btn-danger">🗑️ Delete</button>
+          </form>
+        </td>
+
+      </tr>
+      <% }) %>
+  </tbody>
+</table>

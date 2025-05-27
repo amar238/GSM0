@@ -1,0 +1,36 @@
+<%- include('../partials/flash') %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Clients</h2>
+  <a href="/clients/new" class="btn btn-primary">➕ Add New Client</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Name</th>
+      <th>GST</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% clients.forEach(client => { %>
+      <tr>
+        <td><%= client.name %></td>
+        <td><%= client.GST %></td>
+        <td><%= client.email %></td>
+        <td><%= client.phone %></td>
+        <td><%= client.address %></td>
+        <td>
+          <a href="/clients/<%= client._id %>/edit" class="btn btn-sm btn-warning">✏️ Edit</a>
+          <form action="/clients/<%= client._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+            <button class="btn btn-sm btn-danger">🗑️ Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
